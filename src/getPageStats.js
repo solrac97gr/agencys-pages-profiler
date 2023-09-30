@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import { AddHTTPSIfNotPresent } from "./processBatches";
 
 export async function getPageStats(pageLink) {
   const timeoutOptions = { timeout: 5000 };
@@ -57,9 +58,9 @@ export async function getPageStats(pageLink) {
     const averageViews = totalViews / postElements.length;
     const VKStats = {
       Page: pageNameValue,
-      URL: pageLink,
+      URL: AddHTTPSIfNotPresent(pageLink),
       Followers: parseInt(followerValue.replace(/,/g, ""), 10),
-      Views: parseInt(averageViews,10),
+      Views: parseInt(averageViews, 10),
       Platform: "Vkontakte",
       Format: "Пост",
     };

@@ -17,7 +17,7 @@ export async function processBatches(batches) {
           } catch (error) {
             fs.appendFileSync(errorFile, `${pageLink}: ${error}\n`);
             batchStats.push({
-              URL: pageLink,
+              URL: AddHTTPSIfNotPresent(pageLink),
               Followers: 0,
               Views: 0,
               Platform: "Vkontakte",
@@ -27,7 +27,7 @@ export async function processBatches(batches) {
         } else {
           console.log(`Skipping non-VK URL: ${pageLink}`);
           batchStats.push({
-            URL: pageLink,
+            URL: AddHTTPSIfNotPresent(pageLink),
             Followers: 0,
             Views: 0,
             Platform: "Telegram",
@@ -49,7 +49,7 @@ function IsVKURL(URL) {
   return false;
 }
 
-function AddHTTPSIfNotPresent(URL) {
+export function AddHTTPSIfNotPresent(URL) {
   // Check if the URL starts with "http://" or "https://"
   if (URL.startsWith("http://") || URL.startsWith("https://")) {
     return URL;
