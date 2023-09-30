@@ -20,7 +20,8 @@ export async function processBatches(batches) {
               URL: pageLink,
               Followers: 0,
               Views: 0,
-              Platform: "вк",
+              Platform: "Vkontakte",
+              Format: "Пост",
             });
           }
         } else {
@@ -29,7 +30,8 @@ export async function processBatches(batches) {
             URL: pageLink,
             Followers: 0,
             Views: 0,
-            Platform: "тг",
+            Platform: "Telegram",
+            Format: "Пост",
           });
         }
       })

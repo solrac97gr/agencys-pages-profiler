@@ -59,15 +59,15 @@ export async function getPageStats(pageLink) {
       Page: pageNameValue,
       URL: pageLink,
       Followers: parseInt(followerValue.replace(/,/g, ""), 10),
-      Views: averageViews,
-      Platform: "вк",
+      Views: parseInt(averageViews,10),
+      Platform: "Vkontakte",
+      Format: "Пост",
     };
     await browser.close();
     return VKStats;
   } catch (e) {
     await browser.close();
     throw e;
-    return null;
   }
 }
 

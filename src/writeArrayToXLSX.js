@@ -1,19 +1,28 @@
-import XLSX from "xlsx";
+import ExcelJS from "exceljs";
 
-export function writeArrayToXLSX(dataArray, filePath) {
-  const worksheet = XLSX.utils.json_to_sheet(dataArray);
+export async function writeArrayToXLSX(dataArray, filePath) {
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet("Sheet1");
+
   // Set the font and font size for the worksheet
   const defaultCellStyle = {
-    font: { name: "Calibri", sz: 11 },
-    alignment: { vertical: "center", horizontal: "center" },
+    font: { name: "Calibri", size: 11 },
+    alignment: { vertical: "middle", horizontal: "center" },
   };
+
+  // Get the column keys from the first row of dataArray
+  const columnKeys = Object.keys(dataArray[0]);
+
   // Apply the cell style to each cell in the worksheet
-  for (const cellAddress in worksheet) {
-    if (cellAddress[0] === "!") continue;
-    const cell = worksheet[cellAddress];
-    cell.s = defaultCellStyle;
-  }
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-  XLSX.writeFile(workbook, filePath);
+  worksheet.columns = columnKeys.map((key) => ({
+    key,
+    header: key,
+    width: 15,
+    style: defaultCellStyle,
+  }));
+
+  // Add the data rows to the worksheet
+  worksheet.addRows(dataArray);
+
+  await workbook.xlsx.writeFile(filePath);
 }
