@@ -1,6 +1,7 @@
 node_modules
 .env
 error.out
-example.xlsx
+input.xlsx
 output.xlsx
 .DS_Store
+/out/*
