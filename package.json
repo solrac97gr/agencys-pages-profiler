@@ -1,0 +1,19 @@
+{
+    "author": "",
+    "dependencies": {
+        "puppeteer": "^20.8.1",
+        "xlsx": "^0.18.5",
+        "xlsx-populate": "^1.21.0",
+        "xlsx-style": "^0.8.13"
+    },
+    "description": "",
+    "keywords": [],
+    "license": "ISC",
+    "main": "index.js",
+    "name": "getvk",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "type": "module",
+    "version": "1.0.0"
+}
