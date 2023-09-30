@@ -12,3 +12,14 @@ Project created for obtain the followers of different groups and pages in VK, al
 - It will ask you for the sheet where your info is located
 - After you select the sheet will ask you for the column
 - Your links will start to be proccesed and the errors will be save inside of `out/errors.out`
+
+## Screen Captures
+
+### Input
+
+![input](./images/input.png)
+
+## Output
+
+![output](./images/output.png)
+
