@@ -1,7 +1,7 @@
 import fs from "fs";
 import { getPageStats } from "./getPageStats.js";
 
-const errorFile = "./out/error.out";
+const errorFile = "./out/errors.out";
 
 export async function processBatches(batches) {
   const results = [];
