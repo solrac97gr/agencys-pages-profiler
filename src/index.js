@@ -16,6 +16,6 @@ getListOfPagesFromXlsx(filePath).then((pageLinks) => {
     const stats = batchStats.flat();
     writeArrayToXLSX(stats, outputFilePath);
   }).finally(()=>{
-    console.info("your file was generated in: ",outputFilePath)
+    console.info("Your file was generated in 🗳️: ",outputFilePath)
   });
 });
