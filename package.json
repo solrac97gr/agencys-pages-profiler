@@ -10,8 +10,7 @@
     "main": "index.js",
     "name": "getvk",
     "scripts": {
-        "start": "bun src/index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "bun src/index.js"
     },
     "type": "module",
     "version": "1.0.0"
