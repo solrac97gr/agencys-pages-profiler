@@ -2,7 +2,7 @@
 
 Project created for obtain the followers of different groups and pages in VK, also gets the medium views of the last 10 post published.
 
-- You can try it using the `example.xlsx` file
+- You can try it using the `input.example.xlsx` file
 
 ## How it works
 - We add our input file inside of the folder with the name `input.xlsx` (you can change it in the .env)
