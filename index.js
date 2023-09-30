@@ -189,17 +189,12 @@ function splitIntoBatches(array, batchSize) {
   return batches;
 }
 
-// Example usage:
-const filePath = "./example.xlsx";
-const errorFile = "./error.out";
-
-getListOfPagesFromXlsx(filePath).then((pageLinks) => {
-  console.log(pageLinks)
-  const batches = splitIntoBatches(pageLinks, 5);
-  const results = Promise.all(
-    batches.map(async (batch) => {
-      const batchStats = [];
-      for (const pageLink of batch) {
+async function processBatches(batches) {
+  const results = [];
+  for (const batch of batches) {
+    const batchStats = [];
+    await Promise.all(
+      batch.map(async (pageLink) => {
         if (IsVKURL(pageLink)) {
           try {
             console.log(`Getting VK info of: ${pageLink}`);
@@ -224,11 +219,20 @@ getListOfPagesFromXlsx(filePath).then((pageLinks) => {
             Platform: "тг",
           });
         }
-      }
-      return batchStats;
-    })
-  );
-  results.then((batchStats) => {
+      })
+    );
+    results.push(batchStats);
+  }
+  return results;
+}
+
+// Example usage:
+const filePath = "./example.xlsx";
+const errorFile = "./error.out";
+getListOfPagesFromXlsx(filePath).then((pageLinks) => {
+  console.log(pageLinks);
+  const batches = splitIntoBatches(pageLinks, 10);
+  processBatches(batches).then((batchStats) => {
     const stats = batchStats.flat();
     writeArrayToXLSX(stats, "./output.xlsx");
   });
