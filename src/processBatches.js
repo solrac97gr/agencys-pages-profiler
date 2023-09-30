@@ -15,7 +15,6 @@ export async function processBatches(batches) {
             const VKStats = await getPageStats(AddHTTPSIfNotPresent(pageLink));
             batchStats.push(VKStats);
           } catch (error) {
-            console.error(pageLink + ": ", error);
             fs.appendFileSync(errorFile, `${pageLink}: ${error}\n`);
             batchStats.push({
               URL: pageLink,

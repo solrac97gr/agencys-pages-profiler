@@ -11,10 +11,11 @@ const outputFilePath =  "./out/"+outPutFileName;
 createOutFolderIfNotExist();
 
 getListOfPagesFromXlsx(filePath).then((pageLinks) => {
-  console.log(pageLinks);
   const batches = splitIntoBatches(pageLinks, 10);
   processBatches(batches).then((batchStats) => {
     const stats = batchStats.flat();
     writeArrayToXLSX(stats, outputFilePath);
+  }).finally(()=>{
+    console.info("your file was generated in: ",outputFilePath)
   });
 });
