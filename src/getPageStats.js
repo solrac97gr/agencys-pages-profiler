@@ -50,6 +50,10 @@ export async function getPageStats(pageLink) {
       let elements = Array.from(document.querySelectorAll(selector));
       return elements.map((element) => element.textContent);
     }, postsSelector);
+
+    //Delete the first post for avoid the PIN post or a post with 0 views
+    postElements.shift()
+
     // Calculate the average views
     let totalViews = 0;
     postElements.forEach((view) => {
