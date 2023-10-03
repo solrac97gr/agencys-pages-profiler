@@ -52,22 +52,28 @@ export async function getPageStats(pageLink) {
     }, postsSelector);
 
     //Delete the first post for avoid the PIN post or a post with 0 views
-    postElements.shift()
+    postElements.shift();
 
     // Calculate the average views
     let totalViews = 0;
     postElements.forEach((view) => {
       totalViews += interpretNumberString(view);
     });
+
     const averageViews = totalViews / postElements.length;
+    const followers = parseInt(followerValue.replace(/,/g, ""), 10);
+    const views = Math.floor(parseInt(averageViews, 10) / 1000) * 1000;
+
     const VKStats = {
       Page: pageNameValue,
       URL: AddHTTPSIfNotPresent(pageLink),
-      Followers: parseInt(followerValue.replace(/,/g, ""), 10),
-      Views: parseInt(averageViews, 10),
+      Followers: followers,
+      Views: views,
       Platform: "Vkontakte",
       Format: "Пост",
+      ViewRatio: (views / followers) * 100,
     };
+
     await browser.close();
     return VKStats;
   } catch (e) {
@@ -75,7 +81,6 @@ export async function getPageStats(pageLink) {
     throw e;
   }
 }
-
 
 function interpretNumberString(numberString) {
   const suffixes = {
