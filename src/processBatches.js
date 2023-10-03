@@ -1,5 +1,6 @@
 import fs from "fs";
 import { getPageStats } from "./getPageStats.js";
+import { time } from "console";
 
 const errorFile = "./out/errors.out";
 
@@ -15,7 +16,16 @@ export async function processBatches(batches) {
             const VKStats = await getPageStats(AddHTTPSIfNotPresent(pageLink));
             batchStats.push(VKStats);
           } catch (error) {
-            fs.appendFileSync(errorFile, `${pageLink}: ${error}\n`);
+            const currentDate = new Date();
+            const formattedDate = currentDate
+              .toISOString()
+              .replace(/T/, " ")
+              .replace(/\..+/, "");
+
+            fs.appendFileSync(
+              errorFile,
+              `${formattedDate} | ${pageLink}: ${error}\n`
+            );
             batchStats.push({
               URL: AddHTTPSIfNotPresent(pageLink),
               Followers: 0,
